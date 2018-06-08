@@ -3,7 +3,7 @@ package com.refreasher.datastructure;
 public class Stack {
 	
 	private int m_nSize =0;
-	private static int DEFAULT_CAPACITY = 10;
+	private static int DEFAULT_CAPACITY = 1;
 	private Object elements[];
 	private Object m_top = null;
 	private int m_nTopPointer=-1;
@@ -27,6 +27,10 @@ public class Stack {
 	public void push(Object o)
 	{
 		m_top = o;
+		if(getM_nSize() == elements.length)
+		{
+			resize();
+		}
 		elements[++m_nTopPointer] = m_top;
 		setM_nSize(getM_nSize()+1);
 	}
@@ -38,6 +42,17 @@ public class Stack {
 		m_top = elements[m_nTopPointer--];
 		setM_nSize(getM_nSize()-1);
 		return temp;
+	}
+	public void resize()
+	{
+		Object temp[] = new Object[getM_nSize()*2];
+		int i=0;
+		for(Object o : elements)
+		{
+			temp[i++] = o;
+		}
+		
+		elements = temp;
 	}
 	
 }
